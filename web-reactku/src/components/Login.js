@@ -1,6 +1,7 @@
 import React,{ useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 import "../styles/Login.css";
 
 export default function Login(){
@@ -25,7 +26,7 @@ export default function Login(){
                 </Form.Group>
                 <Button block size="lg" type="submit" disabled={!validateForm()}>Login</Button>
                 <Form.Group>
-                    <p>Dont have Account? <a href="/register">Sign Up!</a></p>
+                    <p>Dont have Account? <Link to="/Register">Sign Up!</Link></p>
                 </Form.Group>
             </Form>
             <nav class="navbar fixed-bottom navbar-light bg-light">
