@@ -10,9 +10,10 @@ const About = () => {
       transitionAppearTimeout={500}
       transitionEnter={false}
       transitionLeave={false}>
-      <div className="about">
-        About
-        </div>
+      <div className="App container">
+        <h1 className="text-danger">About</h1>
+        <button className="btn btn-primary">Submit</button>
+    </div>
     </TransitionGroup>
   )
 }
