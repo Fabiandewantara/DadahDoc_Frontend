@@ -3,7 +3,6 @@ import { TransitionGroup } from 'react-transition-group';
 import '../styles/worksStyle.css'
 import Logo from "../logo.png"
 
-
 const Register = () => {
   return (
     <TransitionGroup
