@@ -12,7 +12,7 @@ const Register = () => {
       transitionAppearTimeout={500}
       transitionEnter={false}
       transitionLeave={false}>
-      <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+      {/* <nav class="navbar navbar-expand-lg navbar-light bg-primary">
         <a class="navbar-brand" href="#">DADAH DOC</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -29,7 +29,7 @@ const Register = () => {
           <span class="navbar-text">
           </span>
         </div>
-      </nav>
+      </nav> */}
 
       <div class="logo">
         <img src={Logo} alt="Girl in a jacket" />

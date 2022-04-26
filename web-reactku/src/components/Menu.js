@@ -1,14 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Logo from "../logonavbar.png"
-import "../styles/Menu.css"
 
 const Menu = () => {
   return (
     <nav class="navbar navbar-light bg-light">
-      <div class="logo">
+      <span><h1>DADAH DOC</h1></span>
+      <Link to="/">Home</Link>
+      <Link to="/works">Works </Link>
+      <Link to="/about"> About </Link>
+      <Link to="/login"> Login </Link>
+      <Link to="/AdminMain"> Admin Main </Link>
+      <Link to="/DoctorMain"> Doctor Main</Link>
         <img src={Logo} />
-      </div>
     </nav>
     // <ul>
     //   <li><Link to="/">Home</Link></li>

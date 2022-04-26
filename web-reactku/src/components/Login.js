@@ -21,7 +21,7 @@ export default function Login() {
       transitionAppearTimeout={500}
       transitionEnter={false}
       transitionLeave={false}>
-      <div class="col-sm-6" className="Login">
+      <div class="col-sm-6">
         <Form onSubmit={handleSubmit}>
           <Form.Group size="lg" controlId="username">
             <Form.Label>Username</Form.Label>
