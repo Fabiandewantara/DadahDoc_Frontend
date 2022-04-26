@@ -5,7 +5,7 @@ import "../styles/Menu.css"
 
 const Menu = () => {
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <nav class="navbar navbar-light bg-light">
       <div class="logo">
         <img src={Logo} />
       </div>
