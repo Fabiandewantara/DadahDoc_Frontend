@@ -4,6 +4,7 @@ import Home from './Home'
 import Works from './Works'
 import About from './About'
 import Login from './Login'
+import RegisterDoctor from './RegisterDoctor'
 
 const Content = () => {
   return (
@@ -12,6 +13,7 @@ const Content = () => {
       <Route path="/works" component={Works} />
       <Route path="/about" component={About} />
       <Route path="/login" component={Login} />
+      <Route path="/RegisterDoctor" component={RegisterDoctor} />
     </Switch>
   )
 }
