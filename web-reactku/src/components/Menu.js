@@ -12,6 +12,7 @@ const Menu = () => {
       <Link to="/login"> Login </Link>
       <Link to="/AdminMain"> Admin Main </Link>
       <Link to="/DoctorMain"> Doctor Main</Link>
+      <Link to="/user">User Page</Link>
         <img src={Logo} />
     </nav>
     // <ul>
