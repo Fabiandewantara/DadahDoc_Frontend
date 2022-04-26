@@ -8,4 +8,28 @@
     transform: translateX(0px);
     transition: all .4s ease-in-out;
   }
-  
+
+.container{
+  margin-top: -460px;
+}
+
+.form-horizontal{
+  margin-top: 10px;
+}
+
+.form-group-btn{
+  margin-left: 680px;
+  margin-top: 13px;
+}
+
+.logo{
+  margin-left: 1100px;
+  margin-top: 40px;
+}
+.navbar-brand{
+  font-weight: bold;
+}
+
+.nav-item{
+  font-weight: bold;
+}

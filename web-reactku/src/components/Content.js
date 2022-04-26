@@ -10,6 +10,7 @@ import DataUser from './DataUser'
 import RegisterDoctor from './RegisterDoctor'
 import DoctorMain from './DoctorMain'
 import ScheduleDoctor from './ScheduleDoctor'
+import Register from './Register'
 
 const Content = () => {
   return (
@@ -24,6 +25,7 @@ const Content = () => {
       <Route path="/registerdoctor" component={RegisterDoctor} />
       <Route path="/doctormain" component={DoctorMain} />
       <Route path="/scheduledoctor" component={ScheduleDoctor} />
+      <Route path="/register" component={Register} />
     </Switch>
   )
 }
