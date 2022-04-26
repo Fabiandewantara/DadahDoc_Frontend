@@ -2,6 +2,7 @@ import React,{ useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/Login.css";
+
 export default function Login(){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -23,7 +24,15 @@ export default function Login(){
                     <Form.Control autoFocus type="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                 </Form.Group>
                 <Button block size="lg" type="submit" disabled={!validateForm()}>Login</Button>
+                <Form.Group>
+                    <p>Dont have Account? <a href="/register">Sign Up!</a></p>
+                </Form.Group>
             </Form>
+            <nav class="navbar fixed-bottom navbar-light bg-light">
+                <div class="container-fluid">
+                    <p>Copyrigth ©1997-2022 Hanif Group™.All Right Reserved</p>
+                </div>
+            </nav>
         </div>
     );
 };
