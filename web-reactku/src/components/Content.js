@@ -8,6 +8,8 @@ import AdminMain from './AdminMain'
 import DataDoctor from './DataDoctor'
 import DataUser from './DataUser'
 import RegisterDoctor from './RegisterDoctor'
+import DoctorMain from './DoctorMain'
+import ScheduleDoctor from './ScheduleDoctor'
 
 const Content = () => {
   return (
@@ -20,6 +22,8 @@ const Content = () => {
       <Route path="/datadoctor" component={DataDoctor} />
       <Route path="/datauser" component={DataUser} />
       <Route path="/registerdoctor" component={RegisterDoctor} />
+      <Route path="/doctormain" component={DoctorMain} />
+      <Route path="/scheduledoctor" component={ScheduleDoctor} />
     </Switch>
   )
 }
