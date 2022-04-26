@@ -1,6 +1,6 @@
 import React from "react";
 
-const registerDoctor = () => {
+const RegisterDoctor = () => {
     return (
         <div>
             <form action="">
@@ -18,4 +18,4 @@ const registerDoctor = () => {
     )
 }
 
-export default registerDoctor
+export default RegisterDoctor
