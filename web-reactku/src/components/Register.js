@@ -4,6 +4,7 @@ import '../styles/worksStyle.css'
 import Logo from "../logo.png"
 import axios from 'axios';
 
+<<<<<<< HEAD
 export default function Register() {
     const[fullname,setFullname]=useState('')
     const[username,setUsername]=useState('')
@@ -20,6 +21,34 @@ export default function Register() {
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify(student)
+=======
+const Register = () => {
+  return (
+    <TransitionGroup
+      transitionName="worksTransition"
+      transitionAppear={true}
+      transitionAppearTimeout={500}
+      transitionEnter={false}
+      transitionLeave={false}>
+      {/* <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <a class="navbar-brand" href="#">DADAH DOC</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="navbar-brand" href="#">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="navbar-brand" href="#">Login</a>
+            </li>
+          </ul>
+          <span class="navbar-text">
+          </span>
+        </div>
+      </nav> */}
+>>>>>>> d5598dbac5fa3c8c38066e8061ca956c5dae1818
 
   }).then(()=>{
     console.log("Data Berhasil")

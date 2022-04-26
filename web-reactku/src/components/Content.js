@@ -11,6 +11,8 @@ import RegisterDoctor from './RegisterDoctor'
 import DoctorMain from './DoctorMain'
 import ScheduleDoctor from './ScheduleDoctor'
 import Register from './Register'
+import UserMain from './UserMain'
+import App from './test'
 
 const Content = () => {
   return (
@@ -26,6 +28,8 @@ const Content = () => {
       <Route path="/doctormain" component={DoctorMain} />
       <Route path="/scheduledoctor" component={ScheduleDoctor} />
       <Route path="/register" component={Register} />
+      <Route path="/user" component={UserMain}/>
+      <Route path="/test" component={App}/>
     </Switch>
   )
 }
