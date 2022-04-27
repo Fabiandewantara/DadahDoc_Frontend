@@ -23,13 +23,25 @@
 }
 
 .logo{
-  margin-left: 1100px;
-  margin-top: 40px;
+  margin-left: 1180px;
+  margin-top: -1px;
+  
 }
+
 .navbar-brand{
   font-weight: bold;
 }
 
 .nav-item{
   font-weight: bold;
+}
+
+.form-signup{
+  margin-top: -450px;
+  margin-left: 100px;
+}
+
+.btn-submit{
+  margin-top: 14px;
+  margin-left: 850px;
 }

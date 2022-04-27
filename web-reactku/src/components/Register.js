@@ -56,11 +56,15 @@ export default class Register extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeFullname = this.onChangeFullname.bind(this);
+    this.onChangeBirthdate = this.onChangeBirthdate.bind(this);
 
     this.state = {
       username: "",
       email: "",
       password: "",
+      fullName: "",
+      birthDate: "",
       successful: false,
       message: ""
     };
@@ -78,6 +82,18 @@ export default class Register extends Component {
     });
   }
 
+  onChangeFullname(e) {
+    this.setState({
+      fullName: e.target.value
+    });
+  }
+
+  onChangeBirthdate(e) {
+    this.setState({
+      birthDate: e.target.value
+    });
+  }
+  
   onChangePassword(e) {
     this.setState({
       password: e.target.value
@@ -98,7 +114,9 @@ export default class Register extends Component {
       AuthService.register(
         this.state.username,
         this.state.email,
-        this.state.password
+        this.state.password,
+        this.state.fullName,
+        this.state.birthDate
       ).then(
         response => {
           this.setState({
@@ -131,32 +149,19 @@ export default class Register extends Component {
         transitionAppearTimeout={500}
         transitionEnter={false}
         transitionLeave={false}></TransitionGroup>
-        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-          <a class="navbar-brand" href="#">DADAH DOC</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-            <a class="navbar-brand" href="#">Register</a>
-            </li>
-            <li class="nav-item">
-            <a class="navbar-brand" href="#">Login</a>
-            </li>
-          </ul>
-          <span class="navbar-text">
-          </span>
-          </div>
-        </nav>
         <div className="col-md-12">
           <div className="card card-container">
+            <div class="logo">
             <img
-      src={Logo}
-      alt="profile-img"
-      className="profile-img-card"
-    />
-            <Form
+                src={Logo}
+                alt="profile-img"
+                className="profile-img-card"
+                width="500px" height="500px"
+              />
+            </div>
+            <div className="col-md-7">
+              <div class="form-signup">
+              <Form
               onSubmit={this.handleRegister}
               ref={c => {
                 this.form = c;
@@ -164,6 +169,28 @@ export default class Register extends Component {
             >
               {!this.state.successful && (
                 <div>
+                  <div className="form-group">
+                    <label htmlFor="fullname">Fullname</label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      name="fullname"
+                      value={this.state.fullname}
+                      onChange={this.onChangeFullname}
+                      validations={[required]} />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="fullname">Birth Date</label>
+                    <Input
+                      type="date"
+                      className="form-control"
+                      name="birthdate"
+                      value={this.state.birthdate}
+                      onChange={this.onChangeBirthdate}
+                      validations={[required]} />
+                  </div>
+
                   <div className="form-group">
                     <label htmlFor="username">Username</label>
                     <Input
@@ -198,7 +225,9 @@ export default class Register extends Component {
                   </div>
 
                   <div className="form-group">
-                    <button className="btn btn-primary btn-block">Sign Up</button>
+                    <div class="btn-submit">
+                      <button className="btn btn-primary btn-block">Sign Up</button>
+                    </div>
                   </div>
                 </div>
               )}
@@ -221,6 +250,8 @@ export default class Register extends Component {
                   this.checkBtn = c;
                 } } />
             </Form>
+              </div>
+            </div>
           </div>
         </div></>
     );
