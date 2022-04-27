@@ -108,9 +108,7 @@ export default class Login extends Component {
       transitionAppearTimeout={500}
       transitionEnter={false}
       transitionLeave={false}></TransitionGroup>
-      <div className="col-md-7">
         <div class="form-signin">
-          <h2>Login Page</h2>
         <Form
               onSubmit={this.handleSubmit}
               ref={c => {
@@ -120,6 +118,7 @@ export default class Login extends Component {
             {!this.state.successful && (
               <div>
                 <div className="form-group">
+                  <h3>Login Page</h3>
                   <label htmlFor="username">Username</label>
                   <Input
                     type="text" className="form-control" name="username"
@@ -160,7 +159,6 @@ export default class Login extends Component {
                 } } />
           </Form>
         </div>
-      </div>
       </>
     )
   }

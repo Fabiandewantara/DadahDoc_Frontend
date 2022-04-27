@@ -52,7 +52,12 @@
 }
 
 .form-signin{
-  margin-left: 100px;
+  max-width: auto;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .btn{
