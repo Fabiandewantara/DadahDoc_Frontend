@@ -1,18 +1,19 @@
 import React from "react";
+import '../styles/registerDoctorStyle.css'
 
 const RegisterDoctor = () => {
     return (
-        <div>
-            <form action="">
-                <label htmlFor="">Username</label>
-                <input type="text" />
-                <label htmlFor="">Password</label>
-                <input type="password" />
-                <label htmlFor="">Nama</label>
-                <input type="text" />
+        <div className="registerDoctor">
+            <form className="form_register" action="">
+                <label className="text" htmlFor="">Username</label><br />
+                <input type="text" /><br />
+                <label className="text" htmlFor="">Password</label><br />
+                <input type="password" /><br />
+                <label className="text" htmlFor="">Nama</label><br />
+                <input type="text" /><br />
                 {/* <label htmlFor="Spesialis"></label>
                 <input type="text" /> */}
-                <button type="button">Register</button>
+                <button className="button btn btn-primary" type="button">Register</button>
             </form>
         </div>
     )

@@ -1,0 +1,20 @@
+.registerDoctor {
+    max-width: auto;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.form_register {
+    text-align: center;
+}
+
+.text {
+    margin-bottom: 10px;
+}
+
+.button {
+    margin-top: 10px;
+}
