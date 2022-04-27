@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import { TransitionGroup } from "react-transition-group";
-import Form from "react-bootstrap/Form";
+import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
-import "../styles/worksStyle.css";
+import { TransitionGroup } from 'react-transition-group';
+import '../styles/worksStyle.css'
+import Logo from "../logo.png"
+import CheckButton from "react-validation/build/button";
+import { isEmail } from "validator";
+
 import AuthService from "../services/auth.service";
-import CheckButton from "react-validation/build/button"
 
 const required = value => {
   if (!value) {
@@ -68,9 +71,9 @@ export default class Login extends Component {
       message: "",
       successful: false
     });
-    this.form.validateForm() 
+    this.form.validateAll();
 
-    if (this.checkBtn.context._errors.length === 0){
+    if (this.checkBtn.context._errors.length === 0) {
       AuthService.login(
         this.state.username,
         this.state.password
@@ -82,26 +85,25 @@ export default class Login extends Component {
           });
         },
         error => {
-          const resMessage = 
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-  
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
           this.setState({
             successful: false,
             message: resMessage
           });
         }
       );
-    }    
+    }
   }
 
   render(){
     return(
-      <>
-      <TransitionGroup
+      <><TransitionGroup
       transitionName="worksTransition"
       transitionAppear={true}
       transitionAppearTimeout={500}
@@ -109,9 +111,12 @@ export default class Login extends Component {
       transitionLeave={false}></TransitionGroup>
       <div className="col-md-7">
         <div class="form-signup">
-          <Form onSubmit={this.handleSubmit} ref={c => {
-            this.form = c;
-          }}>
+        <Form
+              onSubmit={this.handleSubmit}
+              ref={c => {
+                this.form = c;
+              } }
+            >
             {!this.state.successful && (
               <div>
                 <div className="form-group">
