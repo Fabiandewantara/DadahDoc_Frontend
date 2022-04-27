@@ -1,22 +1,286 @@
-import React from "react";
+import React, { Component } from "react";
+import { TransitionGroup } from 'react-transition-group';
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import Select from "react-validation/build/select";
+import { isEmail } from "validator"
+import CheckButton from "react-validation/build/button";
+import Logo from "../logo.png"
+import '../styles/worksStyle.css'
 import '../styles/registerDoctorStyle.css'
 
-const RegisterDoctor = () => {
-    return (
-        <div className="registerDoctor">
-            <form className="form_register" action="">
-                <label className="text" htmlFor="">Username</label><br />
-                <input type="text" /><br />
-                <label className="text" htmlFor="">Password</label><br />
-                <input type="password" /><br />
-                <label className="text" htmlFor="">Nama</label><br />
-                <input type="text" /><br />
-                {/* <label htmlFor="Spesialis"></label>
-                <input type="text" /> */}
-                <button className="button btn btn-primary" type="button">Register</button>
-            </form>
-        </div>
-    )
-}
+import AuthService from "../services/authDoc.service";
 
-export default RegisterDoctor
+const required = value => {
+    if (!value) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                This field is required!
+            </div>
+        );
+    }
+};
+
+const email = value => {
+    if (!isEmail(value)) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                This is not a valid email bro.
+            </div>
+        );
+    }
+};
+
+const vusername = value => {
+    if (value.length < 3 || value.length > 20) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                The username must be between 3 and 20 characters.
+            </div>
+        );
+    }
+};
+
+const vpassword = value => {
+    if (value.length < 6 || value.length > 40) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                The password must be between 6 and 40 characters.
+            </div>
+        );
+    }
+};
+
+export default class RegisterDoctor extends Component {
+    constructor(props) {
+        super(props)
+        this.handleRegisterDoctor = this.handleRegisterDoctor.bind(this)
+        this.onChangeUsername = this.onChangeUsername.bind(this)
+        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
+        this.onChangeFullname = this.onChangeFullname.bind(this);
+        this.onChangeBirthdate = this.onChangeBirthdate.bind(this);
+        this.onChangeScheduleId = this.onChangeScheduleId.bind(this)
+
+        this.state = {
+            username: "",
+            email: "",
+            password: "",
+            fullName: "",
+            birthDate: "",
+            scheduleId: "",
+            successful: false,
+            message: ""
+        };
+    }
+
+    onChangeUsername(e) {
+        this.setState({
+            username: e.target.value
+        });
+    }
+
+    onChangeEmail(e) {
+        this.setState({
+            email: e.target.value
+        });
+    }
+
+    onChangeFullname(e) {
+        this.setState({
+            fullName: e.target.value
+        });
+    }
+
+    onChangeBirthdate(e) {
+        this.setState({
+            birthDate: e.target.value
+        });
+    }
+
+    onChangePassword(e) {
+        this.setState({
+            password: e.target.value
+        });
+    }
+
+    onChangeScheduleId(e) {
+        this.setState({
+            scheduleId: e.target.value
+        })
+    }
+
+    handleRegisterDoctor(e) {
+        e.preventDefault()
+
+        this.setState({
+            message: "",
+            successful: false
+        })
+
+        this.form.validateAll()
+
+        if (this.checkBtn.context._errors.length === 0) {
+            AuthService.register(
+                this.state.username,
+                this.state.email,
+                this.state.password,
+                this.state.fullName,
+                this.state.birthDate,
+                this.state.scheduleId
+            ).then(
+                response => {
+                    this.setState({
+                        message: response.data.message,
+                        successful: true
+                    });
+                },
+                error => {
+                    const resMessage =
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+
+                    this.setState({
+                        successful: false,
+                        message: resMessage
+                    });
+                }
+            );
+        }
+    }
+
+    render() {
+        return (
+            <><TransitionGroup
+                transitionName="worksTransition"
+                transitionAppear={true}
+                transitionAppearTimeout={500}
+                transitionEnter={false}
+                transitionLeave={false}></TransitionGroup>
+                <div className="col-md-12">
+                    <div className="card card-container">
+                        <div class="logo">
+                            <img
+                                src={Logo}
+                                alt="profile-img"
+                                className="profile-img-card"
+                                width="500px" height="500px"
+                            />
+                        </div>
+                        <div className="col-md-7">
+                            <div class="form-signup">
+                                <Form
+                                    onSubmit={this.handleRegisterDoctor}
+                                    ref={c => {
+                                        this.form = c;
+                                    }}
+                                >
+
+                                    {!this.state.successful && (
+                                        <div>
+                                            <div className="form-group">
+                                                <label htmlFor="fullname">Fullname</label>
+                                                <Input
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="fullname"
+                                                    value={this.state.fullname}
+                                                    onChange={this.onChangeFullname}
+                                                    validations={[required]} />
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label htmlFor="fullname">Birth Date</label>
+                                                <Input
+                                                    type="date"
+                                                    className="form-control"
+                                                    name="birthdate"
+                                                    value={this.state.birthdate}
+                                                    onChange={this.onChangeBirthdate}
+                                                    validations={[required]} />
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label htmlFor="username">Username</label>
+                                                <Input
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="username"
+                                                    value={this.state.username}
+                                                    onChange={this.onChangeUsername}
+                                                    validations={[required, vusername]} />
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label htmlFor="email">Email</label>
+                                                <Input
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="email"
+                                                    value={this.state.email}
+                                                    onChange={this.onChangeEmail}
+                                                    validations={[required, email]} />
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label htmlFor="password">Password</label>
+                                                <Input
+                                                    type="password"
+                                                    className="form-control"
+                                                    name="password"
+                                                    value={this.state.password}
+                                                    onChange={this.onChangePassword}
+                                                    validations={[required, vpassword]} />
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label htmlFor="scheduleId">Schedule</label>
+                                                <Select
+                                                    className="form-control"
+                                                    name="scheduleId"
+                                                    value={this.state.scheduleId}
+                                                    onChange={this.onChangeScheduleId}
+                                                    validations={[required]}>
+                                                    <option value=''>Choose your schedule</option>
+                                                    <option value='1'>Morning</option>
+                                                    <option value='2'>Afternoon</option>
+                                                    <option value='3'>Evening</option>
+                                                </Select>
+                                            </div>
+
+                                            <div className="form-group">
+                                                <div class="btn-submit">
+                                                    <button className="btn btn-primary btn-block">Sign Up</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {this.state.message && (
+                                        <div className="form-group">
+                                            <div
+                                                className={this.state.successful
+                                                    ? "alert alert-success"
+                                                    : "alert alert-danger"}
+                                                role="alert"
+                                            >
+                                                {this.state.message}
+                                            </div>
+                                        </div>
+                                    )}
+                                    <CheckButton
+                                        style={{ display: "none" }}
+                                        ref={c => {
+                                            this.checkBtn = c;
+                                        }} />
+                                </Form>
+                            </div>
+                        </div>
+                    </div>
+                </div></>
+        )
+    }
+}
