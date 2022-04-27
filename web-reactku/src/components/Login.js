@@ -1,8 +1,7 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import { TransitionGroup } from "react-transition-group";
 import Form from "react-bootstrap/Form";
 import Input from "react-validation/build/input";
-import Button from "react-validation/build/button";
 import "../styles/worksStyle.css";
 import AuthService from "../services/auth.service";
 
@@ -35,6 +34,7 @@ const vpassword = value => {
     );
   }
 };
+
 export default class Login extends Component {
   constructor(props) {  
     super(props);
@@ -134,17 +134,6 @@ export default class Login extends Component {
                 </div>
               </div>
             )}
-            {this.state.message && (
-              <div className="form-group">
-                <div className={this.state.successful
-                  ? "alert alert-success" : "alert alert-danger"} role="alert">{this.state.message}
-                </div>
-              </div>
-            )}
-            <Button style={{ display:"none" }}
-            ref={c => {
-              this.checkBtn = c;
-            }}/>
           </Form>
         </div>
       </div>
