@@ -1,7 +1,7 @@
 import React from 'react'
 import { TransitionGroup } from 'react-transition-group';
 import '../styles/homeStyle.css'
-
+import authService from '../services/auth.service';
 
 const Home = () => {
   return (
@@ -13,6 +13,7 @@ const Home = () => {
       transitionLeave={false}>
       <div>
         Home
+        <button onClick={authService.logout()}>Logout</button>
       </div>
     </TransitionGroup>
   )
