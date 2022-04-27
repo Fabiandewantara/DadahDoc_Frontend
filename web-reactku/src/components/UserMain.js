@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
 import { TransitionGroup } from "react-transition-group";
+import AuthService from "../services/auth.service";
 
 export default function UserMain() {
     function isChecked(){
@@ -15,20 +16,16 @@ export default function UserMain() {
       <table class="table">
           <thead>
           <tr>
-            <th>Jadwal</th>
             <th>Dokter</th>
-            <th>Status</th>
-            <th>Pasien</th>
             <th>Keluhan</th>
+            <th>Submit</th>
           </tr>
           </thead>
           <tbody>
           <tr>
-            <td>Test</td>
-            <td>Test</td>
-            <td><input type="radio"></input></td>
-            <td>Test</td>
-            <td>Test</td>
+            <td>Nama Dokter</td>
+            <td>Keluhan</td>
+            <td><button className="btn btn-primary">Booking Dokter</button></td>
           </tr>
           </tbody>
       </table>
