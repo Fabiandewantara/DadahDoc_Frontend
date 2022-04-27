@@ -3,9 +3,8 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import { TransitionGroup } from 'react-transition-group';
 import '../styles/worksStyle.css'
-import Logo from "../logo.png"
 import CheckButton from "react-validation/build/button";
-import { isEmail } from "validator";
+import { Link } from "react-router-dom";
 
 import AuthService from "../services/auth.service";
 
@@ -110,7 +109,8 @@ export default class Login extends Component {
       transitionEnter={false}
       transitionLeave={false}></TransitionGroup>
       <div className="col-md-7">
-        <div class="form-signup">
+        <div class="form-signin">
+          <h2>Login Page</h2>
         <Form
               onSubmit={this.handleSubmit}
               ref={c => {
@@ -138,6 +138,7 @@ export default class Login extends Component {
                     <button className="btn btn-primary btn-block">Sign In</button>
                   </div>
                 </div>
+                <p>Dont Have a Account? <Link to="/register">Register</Link></p>
               </div>
             )}
             {this.state.message && (
