@@ -22,9 +22,10 @@ export default function Login() {
       transitionEnter={false}
       transitionLeave={false}>
       <div class="col-sm-6">
+        <div class="login">
         <Form onSubmit={handleSubmit}>
           <Form.Group size="lg" controlId="username">
-            <Form.Label>Username</Form.Label>
+          <label htmlFor="fullname">Username</label>
             <Form.Control
               autoFocus
               type="text"
@@ -41,15 +42,18 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
-          <Button block size="lg" type="submit" disabled={!validateForm()}>
+          
+          <Button block size="lg" type="submit" disabled={!validateForm()} name="btn">
             Login
           </Button>
+        
           <Form.Group>
             <p>
               Dont have Account? <Link to="/Register">Sign Up!</Link>
             </p>
           </Form.Group>
         </Form>
+        </div>
         <nav class="navbar fixed-bottom navbar-light bg-light">
           <div class="container-fluid">
             <p>Copyrigth ©1997-2022 Hanif Group™.All Right Reserved</p>
