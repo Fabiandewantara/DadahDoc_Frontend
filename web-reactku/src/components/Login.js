@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Input from "react-validation/build/input";
 import "../styles/worksStyle.css";
 import AuthService from "../services/auth.service";
+import CheckButton from "react-validation/build/button"
 
 const required = value => {
   if (!value) {
@@ -134,6 +135,23 @@ export default class Login extends Component {
                 </div>
               </div>
             )}
+            {this.state.message && (
+                <div className="form-group">
+                  <div
+                    className={this.state.successful
+                      ? "alert alert-success"
+                      : "alert alert-danger"}
+                    role="alert"
+                  >
+                    {this.state.message}
+                  </div>
+                </div>
+              )}
+              <CheckButton
+                style={{ display: "none" }}
+                ref={c => {
+                  this.checkBtn = c;
+                } } />
           </Form>
         </div>
       </div>
