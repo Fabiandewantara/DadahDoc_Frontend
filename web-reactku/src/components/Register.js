@@ -1,150 +1,228 @@
-import React, { useEffect, useState } from 'react';
+import React, { Component } from "react";
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
 import { TransitionGroup } from 'react-transition-group';
 import '../styles/worksStyle.css'
 import Logo from "../logo.png"
-import axios from 'axios';
+import CheckButton from "react-validation/build/button";
+import { isEmail } from "validator";
 
-<<<<<<< HEAD
-export default function Register() {
-    const[fullname,setFullname]=useState('')
-    const[username,setUsername]=useState('')
-    const[password,setPassword]=useState('')
-    const[email,setEmail]=useState('')
-    const[birthDate,setbirthDate]=useState('')
-    const[students,setStudents]=useState([])
+import AuthService from "../services/auth.service";
 
-  const handleClick=(e)=>{
-    e.preventDefault()
-    const student={fullname,username,password,email,birthDate}
-    console.log(student)
-    fetch("http://localhost:8080/api/auth/signup",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(student)
-=======
-const Register = () => {
-  return (
-    <TransitionGroup
-      transitionName="worksTransition"
-      transitionAppear={true}
-      transitionAppearTimeout={500}
-      transitionEnter={false}
-      transitionLeave={false}>
-      {/* <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <a class="navbar-brand" href="#">DADAH DOC</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+const required = value => {
+  if (!value) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        This field is required!
+      </div>
+    );
+  }
+};
+
+const email = value => {
+  if (!isEmail(value)) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        This is not a valid email bro.
+      </div>
+    );
+  }
+};
+
+const vusername = value => {
+  if (value.length < 3 || value.length > 20) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        The username must be between 3 and 20 characters.
+      </div>
+    );
+  }
+};
+
+const vpassword = value => {
+  if (value.length < 6 || value.length > 40) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        The password must be between 6 and 40 characters.
+      </div>
+    );
+  }
+};
+
+export default class Register extends Component {
+  constructor(props) {
+    super(props);
+    this.handleRegister = this.handleRegister.bind(this);
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+
+    this.state = {
+      username: "",
+      email: "",
+      password: "",
+      successful: false,
+      message: ""
+    };
+  }
+
+  onChangeUsername(e) {
+    this.setState({
+      username: e.target.value
+    });
+  }
+
+  onChangeEmail(e) {
+    this.setState({
+      email: e.target.value
+    });
+  }
+
+  onChangePassword(e) {
+    this.setState({
+      password: e.target.value
+    });
+  }
+
+  handleRegister(e) {
+    e.preventDefault();
+
+    this.setState({
+      message: "",
+      successful: false
+    });
+
+    this.form.validateAll();
+
+    if (this.checkBtn.context._errors.length === 0) {
+      AuthService.register(
+        this.state.username,
+        this.state.email,
+        this.state.password
+      ).then(
+        response => {
+          this.setState({
+            message: response.data.message,
+            successful: true
+          });
+        },
+        error => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+          this.setState({
+            successful: false,
+            message: resMessage
+          });
+        }
+      );
+    }
+  }
+
+  render() {
+    return (
+      <><TransitionGroup
+        transitionName="worksTransition"
+        transitionAppear={true}
+        transitionAppearTimeout={500}
+        transitionEnter={false}
+        transitionLeave={false}></TransitionGroup>
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+          <a class="navbar-brand" href="#">DADAH DOC</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="navbar-brand" href="#">Register</a>
+            <a class="navbar-brand" href="#">Register</a>
             </li>
             <li class="nav-item">
-              <a class="navbar-brand" href="#">Login</a>
+            <a class="navbar-brand" href="#">Login</a>
             </li>
           </ul>
           <span class="navbar-text">
           </span>
-        </div>
-      </nav> */}
->>>>>>> d5598dbac5fa3c8c38066e8061ca956c5dae1818
+          </div>
+        </nav>
+        <div className="col-md-12">
+          <div className="card card-container">
+            <img
+      src={Logo}
+      alt="profile-img"
+      className="profile-img-card"
+    />
+            <Form
+              onSubmit={this.handleRegister}
+              ref={c => {
+                this.form = c;
+              } }
+            >
+              {!this.state.successful && (
+                <div>
+                  <div className="form-group">
+                    <label htmlFor="username">Username</label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      name="username"
+                      value={this.state.username}
+                      onChange={this.onChangeUsername}
+                      validations={[required, vusername]} />
+                  </div>
 
-  }).then(()=>{
-    console.log("Data Berhasil")
-  })
-}
+                  <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      name="email"
+                      value={this.state.email}
+                      onChange={this.onChangeEmail}
+                      validations={[required, email]} />
+                  </div>
 
-useEffect(()=>{
-  fetch("http://localhost:8080/student/getAll")
-  .then(res=>res.json())
-  .then((result)=>{
-    setStudents(result);
+                  <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <Input
+                      type="password"
+                      className="form-control"
+                      name="password"
+                      value={this.state.password}
+                      onChange={this.onChangePassword}
+                      validations={[required, vpassword]} />
+                  </div>
+
+                  <div className="form-group">
+                    <button className="btn btn-primary btn-block">Sign Up</button>
+                  </div>
+                </div>
+              )}
+
+              {this.state.message && (
+                <div className="form-group">
+                  <div
+                    className={this.state.successful
+                      ? "alert alert-success"
+                      : "alert alert-danger"}
+                    role="alert"
+                  >
+                    {this.state.message}
+                  </div>
+                </div>
+              )}
+              <CheckButton
+                style={{ display: "none" }}
+                ref={c => {
+                  this.checkBtn = c;
+                } } />
+            </Form>
+          </div>
+        </div></>
+    );
   }
-)
-},[])
-return (
-  <TransitionGroup 
-  transitionName="worksTransition"
-  transitionAppear={true}
-  transitionAppearTimeout={500}
-  transitionEnter={false}
-  transitionLeave={false}>
-<nav class="navbar navbar-expand-lg navbar-light bg-primary">
-<a class="navbar-brand" href="#">DADAH DOC</a>
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-<span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse" id="navbarText">
-<ul class="navbar-nav mr-auto">
-  <li class="nav-item">
-  <a class="navbar-brand" href="#">Register</a>
-  </li>
-  <li class="nav-item">
-  <a class="navbar-brand" href="#">Login</a>
-  </li>
-</ul>
-<span class="navbar-text">
-</span>
-</div>
-</nav>
-
-<div class="logo">
-<img src={Logo} alt="Girl in a jacket"/>
-</div>
-<div class="container">
-<h2>Register Patient</h2>
-<form class="form-horizontal" onSubmit={this.handleSubmit}>
-<div class="form-group">
-  <label class="control-label col-sm-2" for="fullname">Full Name</label>
-  <div class="col-sm-7">
-    <input type="text" class="form-control" id="fullname" placeholder="Enter Fullname" name="fullname" value={fullname}  onChange={(e)=>setFullname(e.target.value)}/>
-  </div>
-</div>
-<div class="form-group">
-  <label class="control-label col-sm-2" for="fullname">Email</label>
-  <div class="col-sm-7">
-    <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" value={email}  onChange={(e)=>setEmail(e.target.value)}/>
-  </div>
-</div>
-{/* <label class="control-label col-sm-2" for="gender">Gender</label>
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
-  <label class="form-check-label" for="flexRadioDefault1">
-    Female
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
-  <label class="form-check-label" for="flexRadioDefault2">
-    Male
-  </label>
-</div> */}
-  <div class="form-group"> 
-  <div class="col-sm-7">
-  <label class="control-label" for="date">Date</label>
-    <input class="form-control" id="birthDate" name="birthDate" placeholder="MM/DD/YYY" type="date" value={birthDate}  onChange={(e)=>setbirthDate(e.target.value)}/>
-  </div>
-  </div>
-<div class="form-group">
-  <label class="control-label col-sm-2" for="username">Username</label>
-  <div class="col-sm-7">
-    <input type="text" class="form-control" id="username" placeholder="Enter Fullname" name="username" value={username}  onChange={(e)=>setUsername(e.target.value)}/>
-  </div>
-</div>
-<div class="form-group">
-  <label class="control-label col-sm-2" for="password">Password</label>
-  <div class="col-sm-7">
-    <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password" value={password}  onChange={(e)=>setPassword(e.target.value)}/>
-  </div>
-</div>
-<div class="form-group-btn">        
-<button type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-  Submit
-</button>
-</div>
-</form>
-</div>
-</TransitionGroup>
-);
 }
